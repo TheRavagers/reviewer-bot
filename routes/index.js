@@ -8,5 +8,4 @@ import IndexController from '../controllers/index';
 const indexController = new IndexController();
 
 router.post('/', indexController.pullRequest);
-
 module.exports = router;
