@@ -12,9 +12,8 @@ var mongoose = require('mongoose');
 
 var db;
 
-var app = express();
 
-mongoose.connect('mongodb://moniv:12345678@ds139685.mlab.com:39685/bot_data_12', function (err, database) {
+mongoose.connect('mongodb://ravagers:6t^2dz3*qrlZ@ds149613.mlab.com:49613/ravagers', function (err, database) {
   if (err) {
     console.log(err);
   }
