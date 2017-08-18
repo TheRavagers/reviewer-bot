@@ -14,14 +14,14 @@ var db;
 
 var app = express();
 
-mongoose.connect('mongodb://moniv:12345678@ds139685.mlab.com:39685/bot_data_12', function(err, database) {
-    if (err) {
-        console.log(err);
-    }
+mongoose.connect('mongodb://moniv:12345678@ds139685.mlab.com:39685/bot_data_12', function (err, database) {
+  if (err) {
+    console.log(err);
+  }
 
-    // Save database object from the callback for reuse.
-    db = database;
-    console.log("Database connection ready");
+  // Save database object from the callback for reuse.
+  db = database;
+  console.log("Database connection ready");
 
 });
 
@@ -42,8 +42,8 @@ const logInjector = (req, res, next) => {
   next();
 };
 
-const create = (port) => {
-  const PORT = port || 9999;
+const create = () => {
+  const PORT = process.env.PORT || 9999;
   app.use(requestIdInjector);
   app.use(logInjector); // LogInjector must follow requestIdInjector
 
@@ -55,7 +55,8 @@ const create = (port) => {
     res.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT, PATCH');
     next();
   });
-  app.listen(PORT, () => { });
+
+  app.listen(PORT, () => { console.log('app running on port', PORT); });
 
   return app;
 };
