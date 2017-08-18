@@ -1,17 +1,12 @@
 'use strict'
 
-import {Router} from 'express';
+import { Router } from 'express';
 const router = new Router();
 
-router.get('/', ((req, res)=> {
-    res.render('home');
-}));
+/* inject dependecies */
+import IndexController from '../controllers/index';
+const indexController = new IndexController();
 
-router.get('/health', ((req, res)=> {
-    req.log.error("my log");
-    res.json({
-        success:true
-    })
-}));
+router.post('/', indexController.pullRequest);
 
-module.exports=router;
+module.exports = router;
