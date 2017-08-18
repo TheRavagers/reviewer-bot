@@ -4,32 +4,26 @@ var mongoose = require('mongoose'),
 
 var UserSchema = new Schema({
     firstName: {
-        type : String,
+        type: String,
         trim: true
     },
     lastName: {
-        type : String,
+        type: String,
         trim: true
     },
     email: {
-        type : String,
+        type: String,
         trim: true,
         match: /.+\@.+\..+/
     },
     username: {
-        type : String,
+        type: String,
         trim: true,
-        unique:true,
-        required:true
+        unique: true,
+        required: true
     },
     repo: [Schema.Types.ObjectId]
 
-
-
-
-    
-
-    
 });
 
 
