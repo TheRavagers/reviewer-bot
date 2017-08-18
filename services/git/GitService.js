@@ -4,7 +4,7 @@ import axios from 'axios';
 //import urlConfig from './repoURL.json'
 const urlConfig = require('./repoURL.json');
 
-class GitApiManager {
+export default class GitApiManager {
     constructor(org) {
         if (!org)
             throw new Error('org is required to instantiate GitApiManager');
@@ -83,10 +83,12 @@ class GitApiManager {
         if (!this.token)
             throw new Error("No token found");
 
-        if (method == 'POST') {
-            return axios.post(url, data, {
-                'Authorization': `token ${this.token}`,
-                'Content-Type': 'application/json'
+        if (method == 'POST' || method == 'post') {
+            return axios.post(url, JSON.stringify(data), {
+                headers:{
+                    'Authorization': `token ${this.token}`,
+                    'Content-Type': 'application/json'
+                }
             });
         }
 
@@ -103,9 +105,8 @@ class GitApiManager {
             }
         }
 
-        URL = URL.replace(`org`, this.org);
+        URL = URL.replace(`{org}`, this.org);
+        console.log(URL);
         return URL;
     }
 }
-
-export default GitApiManager;
