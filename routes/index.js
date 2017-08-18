@@ -1,17 +1,13 @@
 'use strict'
 
-import {Router} from 'express';
+import { Router } from 'express';
 const router = new Router();
 
-router.get('/', ((req, res)=> {
-    res.render('home');
-}));
+import Api from '../githubApi/index';
+const api = new Api();
 
-router.get('/health', ((req, res)=> {
-    req.log.error("my log");
-    res.json({
-        success:true
-    })
-}));
+router.get('/', (req, res) => {
+    api.getOrgs();
+});
 
-module.exports=router;
+module.exports = router;

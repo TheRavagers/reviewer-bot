@@ -1,6 +1,6 @@
 'use strict'
 
-import App  from './server';
+import App from './server';
 import routes from './routes'
 import middleware from './middlewares/ErrorHandler';
 import bodyParser from 'body-parser';
@@ -13,10 +13,10 @@ const app = App.create();
 const logger = Logger.create();
 
 app.engine('handlebars', exphbs({
-    layoutsDir   : path.join(__dirname, '/public/views/layouts'),
-    defaultLayout: 'main',
-    helpers      : null,
-    partialsDir  : [path.join(__dirname, '/public/views/partials')]
+  layoutsDir: path.join(__dirname, '/public/views/layouts'),
+  defaultLayout: 'main',
+  helpers: null,
+  partialsDir: [path.join(__dirname, '/public/views/partials')]
 }));
 
 app.set('view engine', 'handlebars');
