@@ -3,28 +3,50 @@ var mongoose = require('mongoose'),
     crypto = require('crypto');
 
 var UserSchema = new Schema({
-    firstName: {
-        type: String,
-        trim: true
+    id: Number,
+
+    login: {
+        type: String
     },
     lastName: {
-        type: String,
-        trim: true
+        type: String
     },
     email: {
         type: String,
-        trim: true,
         match: /.+\@.+\..+/
     },
     username: {
-        type: String,
-        trim: true,
-        unique: true,
-        required: true
+        type: String
     },
-    repo: [Schema.Types.ObjectId]
+    repo: [Number],
+
+    type: String,
+
+    site_admin: Boolean
 
 });
 
 
 mongoose.model('User', UserSchema);
+
+
+
+// {
+//       "login": "mdewey",
+//       "id": 1793923,
+//       "avatar_url": "https://avatars2.githubusercontent.com/u/1793923?v=4",
+//       "gravatar_id": "",
+//       "url": "https://api.github.com/users/mdewey",
+//       "html_url": "https://github.com/mdewey",
+//       "followers_url": "https://api.github.com/users/mdewey/followers",
+//       "following_url": "https://api.github.com/users/mdewey/following{/other_user}",
+//       "gists_url": "https://api.github.com/users/mdewey/gists{/gist_id}",
+//       "starred_url": "https://api.github.com/users/mdewey/starred{/owner}{/repo}",
+//       "subscriptions_url": "https://api.github.com/users/mdewey/subscriptions",
+//       "organizations_url": "https://api.github.com/users/mdewey/orgs",
+//       "repos_url": "https://api.github.com/users/mdewey/repos",
+//       "events_url": "https://api.github.com/users/mdewey/events{/privacy}",
+//       "received_events_url": "https://api.github.com/users/mdewey/received_events",
+//       "type": "User",
+//       "site_admin": false
+//     }

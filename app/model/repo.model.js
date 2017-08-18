@@ -3,19 +3,29 @@ var mongoose = require('mongoose'),
     crypto = require('crypto');
 
 var RepoSchema = new Schema({
+
+    id: Number,
+
     repoName: {
         type: String
     },
+
     repoType: {
         type: String,
         trim: true
     },
+
     language: {
-        type: String,
-        trim: true
+        type: [String]
+        
     },
+
+    private: Boolean,
+
+    
+
     author: {
-        type: [Schema.Types.ObjectId]
+        type: [Number]
     }
 
 });
