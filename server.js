@@ -7,6 +7,25 @@ const WinstonContext = require('winston-context');
 
 const app = express();
 
+
+var mongoose = require('mongoose');
+
+var db;
+
+var app = express();
+
+mongoose.connect('mongodb://moniv:12345678@ds139685.mlab.com:39685/bot_data_12', function(err, database) {
+    if (err) {
+        console.log(err);
+    }
+
+    // Save database object from the callback for reuse.
+    db = database;
+    console.log("Database connection ready");
+
+});
+
+
 const logInjector = (req, res, next) => {
   req.log = new WinstonContext(logger.create(process.env.LOGSENE_TOKEN || 'dev-token'), '', {requestId: req.id, user_id:Math.random()}); // eslint-disable-line
   req.log.info(
