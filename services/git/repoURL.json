@@ -1,9 +1,9 @@
-{   
-    "security_token":"112f52f8c8ff6ecf21bbe98ce31ce20f7dd9bb4b",
+{
+    "security_token": "112f52f8c8ff6ecf21bbe98ce31ce20f7dd9bb4b",
     "repository_url": "https://api.github.com/repos/{org}/{repo}",
-    "commits_url":"https://api.github.com/repos/{org}/{repo}/commits",
-    "contributors_url":"https://api.github.com/repos/{org}/{repo}/contributors",
-    "comments_url":"https://api.github.com/repos/{org}/{repo}/comments",
-    "submit_pull_requests_reviewers":"https://api.github.com/repos/{org}/{repo}/pulls/{prnumber}/requested_reviewers",
-    "repoListApiUrl" : "https://api.github.com/orgs/{org}/repos"
+    "commits_url": "https://api.github.com/repos/{org}/{repo}/commits",
+    "contributors_url": "https://api.github.com/repos/{org}/{repo}/contributors",
+    "comments_url": "https://api.github.com/repos/{org}/{repo}/comments",
+    "submit_pull_requests_reviewers": "https://api.github.com/repos/{org}/{repo}/pulls/{prnumber}/requested_reviewers",
+    "repoListApiUrl": "https://api.github.com/orgs/{org}/repos"
 }
