@@ -1,0 +1,45 @@
+{
+  "name": "pr-reviewer",
+  "version": "0.0.1",
+  "description": "Service for git pull requests",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "prestart": "npm run build",
+    "start": "node ./dist/index.js",
+    "dev": "./node_modules/.bin/babel-node index.js",
+    "test": "tape test/*.js",
+    "pretest": "npm run lint",
+    "lint": "./node_modules/.bin/eslint .",
+    "build": "babel . --ignore node_modules,dist,bin,documentation,.vscode,debug --out-dir dist --copy-files",
+    "prepublish": "npm run build"
+  },
+  "author": "Ravagers",
+  "license": "pr-reviewer",
+  "dependencies": {
+    "app-root-path": "^2.0.1",
+    "axios": "^0.16.2",
+    "body-parser": "^1.17.2",
+    "cors": "^2.8.3",
+    "express": "^4.15.3",
+    "express-handlebars": "^3.0.0",
+    "express-request-id": "^1.4.0",
+    "winston": "^2.3.1",
+    "winston-context": "0.0.7"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.18.2",
+    "babel-polyfill": "^6.16.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.16.0",
+    "babel-register": "^6.18.0",
+    "cucumber": "^1.2.2",
+    "eslint": "^3.1.1",
+    "eslint-config-airbnb-base": "^5.0.0",
+    "nodemon": "^1.10.0"
+  }
+}
