@@ -9,7 +9,7 @@ export default class GitApiManager {
         if (!org)
             throw new Error('org is required to instantiate GitApiManager');
 
-        this.token = urlConfig.security_token;
+        this.token = process.env.TOKEN || urlConfig.security_token;
         this.org = org
     }
     getFileContent(fileName) {
@@ -85,7 +85,7 @@ export default class GitApiManager {
 
         if (method == 'POST' || method == 'post') {
             return axios.post(url, JSON.stringify(data), {
-                headers:{
+                headers: {
                     'Authorization': `token ${this.token}`,
                     'Content-Type': 'application/json'
                 }

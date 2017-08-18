@@ -22,7 +22,7 @@ export default class Index {
             gitService.submitPullRequestReviewers(name, number, reviewers).then((response) => {
                 console.log(response);
             }).catch((serverError) => {
-                console.log('Some error while assigning review');
+                console.log('Some error while assigning review', serverError);
             });
         }
 
