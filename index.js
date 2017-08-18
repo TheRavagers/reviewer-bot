@@ -25,7 +25,7 @@ app.set('views', path.join(__dirname, '/public/views'));
 app.options('*', cors());
 app.use(express.static('public'));
 app.use(bodyParser.json());
-app.use('/', routes);
+app.use('/api', routes);
 app.use(middleware.errorHandler);
 
 app.use((req, res) => {

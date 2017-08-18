@@ -3,11 +3,10 @@
 import { Router } from 'express';
 const router = new Router();
 
-import Api from '../githubApi/index';
-const api = new Api();
+/* inject dependecies */
+import IndexController from '../controllers/index';
+const indexController = new IndexController();
 
-router.get('/', (req, res) => {
-    api.getOrgs();
-});
+router.post('/', indexController.pullRequest);
 
 module.exports = router;

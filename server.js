@@ -8,7 +8,7 @@ const WinstonContext = require('winston-context');
 const app = express();
 
 const logInjector = (req, res, next) => {
-  req.log = new WinstonContext(logger.create(process.env.LOGSENE_TOKEN || 'dev-token'), '', {requestId: req.id, user_id:Math.random()}); // eslint-disable-line
+  req.log = new WinstonContext(logger.create(process.env.LOGSENE_TOKEN || 'dev-token'), '', { requestId: req.id, user_id: Math.random() }); // eslint-disable-line
   req.log.info(
     `Incoming ${req.method} request to ${req.path}`,
     {
@@ -36,7 +36,7 @@ const create = (port) => {
     res.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT, PATCH');
     next();
   });
-  app.listen(PORT, () => {});
+  app.listen(PORT, () => { });
 
   return app;
 };
