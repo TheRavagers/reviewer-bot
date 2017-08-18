@@ -1,5 +1,7 @@
 'use strict';
 
+
+// just added 
 module.exports.errorHandler = (error, req, res, next) => {
   // If there's no error, then proceed to the next middleware
   if (!error) return next();
