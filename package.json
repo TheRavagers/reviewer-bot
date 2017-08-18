@@ -28,7 +28,8 @@
     "express-handlebars": "^3.0.0",
     "express-request-id": "^1.4.0",
     "winston": "^2.3.1",
-    "winston-context": "0.0.7"
+    "winston-context": "0.0.7",
+    "mongoose": "^4.8.5"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
@@ -40,6 +41,7 @@
     "cucumber": "^1.2.2",
     "eslint": "^3.1.1",
     "eslint-config-airbnb-base": "^5.0.0",
-    "nodemon": "^1.10.0"
+    "nodemon": "^1.10.0",
+    "mongoose": "^4.8.5"
   }
 }
