@@ -93,7 +93,7 @@ export default class DataSeedService {
 
 	upsertUserStatics = (data) => {
 		return new Promise((resolve, reject)=>{
-			UserStatics.findOneAndUpdate({id: id}, data, {
+			UserStatics.findOneAndUpdate({id: data.id}, data, {
 				upsert: true
 			},  function(err, data) {
 				if(err) {

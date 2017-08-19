@@ -2,11 +2,12 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema
 
 var ReviewerSchema = new Schema({
-    user_id: Number,
 
-    username: {
-        type: String
-    },
+    pr_id: Number,
+
+    pr_number: Number,
+
+    user_id: Number,
     
     repo: {
         type: String

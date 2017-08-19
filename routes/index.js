@@ -14,5 +14,5 @@ const repoController = new RepoController(GitService);
 router.post('/repoData', repoController.repoData);
 router.get('/repoData', repoController.getRepoData);
 
-router.post('/', indexController.pullRequest);
+router.post('/', indexController.pullRequestTwo);
 module.exports = router;
