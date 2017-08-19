@@ -22,14 +22,16 @@
   "dependencies": {
     "app-root-path": "^2.0.1",
     "axios": "^0.16.2",
+    "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
     "cors": "^2.8.3",
     "express": "^4.15.3",
     "express-handlebars": "^3.0.0",
     "express-request-id": "^1.4.0",
+    "github": "^9.2.0",
+    "mongoose": "^4.8.5",
     "winston": "^2.3.1",
-    "winston-context": "0.0.7",
-    "mongoose": "^4.8.5"
+    "winston-context": "0.0.7"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
