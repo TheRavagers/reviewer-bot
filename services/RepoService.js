@@ -23,6 +23,17 @@ export default class DataSeedService {
 			});
 		})
 	} 
+	createRepo = (data) => {
+		return new Promise((resolve, reject)=>{
+			Repo.create(data, function(err, data) {
+				if(err) {
+					return reject(err);
+				} else {
+					resolve( data );
+				}
+			});
+		})
+	} 
 
 	/*
 	* Get user data
