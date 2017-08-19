@@ -23,17 +23,19 @@ export default class DataSeedService {
 			});
 		})
 	} 
-	createRepo = (data) => {
+	upsertRepo = (data) => {
 		return new Promise((resolve, reject)=>{
-			Repo.create(data, function(err, data) {
+			Repo.findOneAndUpdate({repo_id:data.repo_id}, data,{
+				upsert:true
+			}, function(err, data) {
 				if(err) {
 					return reject(err);
 				} else {
 					resolve( data );
 				}
 			});
-		})
-	} 
+		});
+	}
 
 	/*
 	* Get user data
