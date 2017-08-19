@@ -22,7 +22,9 @@ var UserSchema = new Schema({
 
     type: String,
 
-    site_admin: Boolean
+    site_admin: Boolean,
+
+    statics_id: Number 
 
 });
 
