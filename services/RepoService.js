@@ -88,7 +88,7 @@ export default class DataSeedService {
 					resolve( data );
 				}
 			});
-		})
+		});
 	}
 
 	upsertUserStatics = (data) => {
@@ -133,7 +133,7 @@ export default class DataSeedService {
 
 	insertReviewersToMongo = (data)=>{
 		return new Promise((resolve, reject)=>{
-			UserPreferedReviewers.findOneAndUpdate({user_id: data.user_id,repo_id:data.repo_id}, data, {
+			UserPreferedReviewers.create(data, {
 				upsert: true
 			},  function(err, data) {
 				if(err) {
