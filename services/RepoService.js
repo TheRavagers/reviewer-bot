@@ -22,7 +22,8 @@ export default class DataSeedService {
 				}
 			});
 		})
-	} 
+	}
+
 	upsertRepo = (data) => {
 		return new Promise((resolve, reject)=>{
 			Repo.findOneAndUpdate({repo_id:data.repo_id}, data,{
@@ -50,7 +51,21 @@ export default class DataSeedService {
 				}
 			});
 		})
-	} 
+	}
+
+	upsertUserData = (data)=>{
+		return new Promise((resolve, reject)=>{
+			User.findOneAndUpdate({id: data.id}, data, {
+				upsert: true
+			},  function(err, data) {
+				if(err) {
+					return reject(err);
+				} else {
+					resolve( data );
+				}
+			});
+		})
+	}
 
 	getReviewerDataById = (id) => {
 		return new Promise((resolve, reject)=>{
@@ -102,9 +117,11 @@ export default class DataSeedService {
 		})
 	}
 
-	insertRepoCommits = (data)=>{
+	userRepoCommits = (data)=>{
 		return new Promise((resolve, reject)=>{
-			UserCommits.create(data, function(err, data) {
+			UserCommits.findOneAndUpdate({sha: data.sha}, data, {
+				upsert: true
+			},  function(err, data) {
 				if(err) {
 					return reject(err);
 				} else {
@@ -116,7 +133,9 @@ export default class DataSeedService {
 
 	insertReviewersToMongo = (data)=>{
 		return new Promise((resolve, reject)=>{
-			UserPreferedReviewers.create(data, function(err, data) {
+			UserPreferedReviewers.findOneAndUpdate({user_id: data.user_id,repo_id:data.repo_id}, data, {
+				upsert: true
+			},  function(err, data) {
 				if(err) {
 					return reject(err);
 				} else {
