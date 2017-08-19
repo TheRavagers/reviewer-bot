@@ -4,12 +4,12 @@ var mongoose = require('mongoose'),
 
 var CommitSchema = new Schema({
     sha: String,
-
     tree: [{
-        p: String,
-
-    }]
-
+        path: String,
+        url:String
+    }],
+    repo_id:Number,``
+    repo_name:String
 });
 
 
