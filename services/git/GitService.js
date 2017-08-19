@@ -1,7 +1,6 @@
 'use strict'
 
 import axios from 'axios';
-//import urlConfig from './repoURL.json'
 const urlConfig = require('./repoURL.json');
 
 export default class GitApiManager {
@@ -9,8 +8,7 @@ export default class GitApiManager {
         if (!org)
             throw new Error('org is required to instantiate GitApiManager');
 
-        this.token = process.env.TOKEN || urlConfig.security_token;
-        this.org = org
+        this.org = org;
     }
 
     getFileContent(fileName) {
@@ -21,9 +19,6 @@ export default class GitApiManager {
     }
 
     getRepoList(repoName) {
-        if (!this.token)
-            throw new Error("No token found");
-
         return this.makeHttpCall(this.processURL(urlConfig.repoListApiUrl, { repo: repoName }))
             .then((response) => {
                 return Promise.resolve(response.data);
@@ -31,9 +26,6 @@ export default class GitApiManager {
     }
 
     getRepoInfo(repoName) {
-        if (!this.token)
-            throw new Error("No token found");
-
         return this.makeHttpCall(this.processURL(urlConfig.repository_url, { repo: repoName }))
             .then((response) => {
                 return Promise.resolve(response.data);
@@ -41,9 +33,6 @@ export default class GitApiManager {
     }
 
     getContributorsList(repoName) {
-        if (!this.token)
-            throw new Error("No token found");
-
         return this.makeHttpCall(this.processURL(urlConfig.contributors_url, { repo: repoName }))
             .then((response) => {
                 return Promise.resolve(response.data);
@@ -51,9 +40,6 @@ export default class GitApiManager {
     }
 
     getContributorsStats(repoName) {
-        if (!this.token)
-            throw new Error("No token found");
-
         return this.makeHttpCall(this.processURL(urlConfig.contributors_stats_url, { repo: repoName }))
             .then((response) => {
                 return Promise.resolve(response.data);
@@ -61,9 +47,6 @@ export default class GitApiManager {
     }
 
     getCommits(repoName) {
-        if (!this.token)
-            throw new Error("No token found");
-
         return this.makeHttpCall(this.processURL(urlConfig.commits_url, { repo: repoName }))
             .then((response) => {
                 return Promise.resolve(response.data);
@@ -71,9 +54,6 @@ export default class GitApiManager {
     }
 
     getComments(repoName) {
-        if (!this.token)
-            throw new Error("No token found");
-
         return this.makeHttpCall(this.processURL(urlConfig.comments_url, { repo: repoName }))
             .then((response) => {
                 return Promise.resolve(response.data);
@@ -81,9 +61,6 @@ export default class GitApiManager {
     }
 
     submitPullRequestReviewers(repo, prnumber, data) {
-        if (!this.token)
-            throw new Error("No token found");
-
         console.log(this.processURL(urlConfig.submit_pull_requests_reviewers, { repo, prnumber }));
 
         return this.makeHttpCall(this.processURL(urlConfig.submit_pull_requests_reviewers, { repo, prnumber }), 'post', data)
@@ -96,24 +73,24 @@ export default class GitApiManager {
      * @param {*} complete url of bitbucket 
      */
     makeHttpCall(url, method, data) {
-        if (!this.token)
-            throw new Error("No token found");
+        return this.generateToken().then((token) => {
+            if (method == 'POST' || method == 'post') {
+                return axios.post(url, JSON.stringify(data), {
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+            }
 
-        if (method == 'POST' || method == 'post') {
-            return axios.post(url, JSON.stringify(data), {
+            return axios.get(url, {
                 headers: {
-                    'Authorization': `token ${this.token}`,
-                    'Content-Type': 'application/json'
+                    "Authorization": `token ${token}`
                 }
             });
-        }
-
-        return axios.get(url, {
-            headers: {
-                "Authorization": `token ${this.token}`
-            }
         });
     }
+
     processURL(URL, data) {
         for (const key in data) {
             if (URL.indexOf(`{${key}}`) > 0) {
@@ -124,5 +101,26 @@ export default class GitApiManager {
         URL = URL.replace(`{org}`, this.org);
         console.log(URL);
         return URL;
+    }
+
+    generateToken() {
+        var username = 'moniv';
+        var password = '8bilubarber';
+
+        var encodedPassword = new Buffer(`${username}:${password}`).toString('base64');
+        return axios.post(`https://api.github.com/authorizations`, {
+            scopes: ['repo'],
+            note: `BOT-${Math.floor(Math.random() * 900000)}`
+        }, {
+                headers: {
+                    "Authorization": `Basic ${encodedPassword}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then((response) => {
+                return Promise.resolve(response.data.token);
+            }).catch((authError) => {
+                console.log(authError);
+            })
     }
 }
