@@ -18,3 +18,4 @@ var UserPreferedReviewersSchema = new Schema({
 
 
 mongoose.model('UserPreferedReviewers', UserPreferedReviewersSchema);
+module.exports = UserPreferedReviewersSchema;

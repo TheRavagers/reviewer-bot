@@ -26,6 +26,9 @@ app.options('*', cors());
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use('/api', routes);
+
+app.use('/repo', routes);
+
 app.use(middleware.errorHandler);
 
 app.use((req, res) => {

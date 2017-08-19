@@ -7,10 +7,12 @@ var CommitSchema = new Schema({
 
     tree: [{
         p: String,
-        
+
     }]
 
 });
 
 
 mongoose.model('Commit', CommitSchema);
+
+module.exports = CommitSchema;

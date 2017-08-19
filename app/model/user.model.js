@@ -30,6 +30,7 @@ var UserSchema = new Schema({
 
 
 mongoose.model('User', UserSchema);
+module.exports = UserSchema;
 
 
 

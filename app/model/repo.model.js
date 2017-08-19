@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
 
 var RepoSchema = new Schema({
 
-    id: Number,
+    repo_id: Number,
 
     repoName: {
         type: String
@@ -22,7 +22,7 @@ var RepoSchema = new Schema({
 
     private: Boolean,
 
-    
+
 
     author: {
         type: [Number]
@@ -31,3 +31,5 @@ var RepoSchema = new Schema({
 });
 
 mongoose.model('Repo', RepoSchema);
+
+module.exports = RepoSchema;

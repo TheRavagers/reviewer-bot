@@ -13,7 +13,7 @@ var mongoose = require('mongoose');
 var db;
 
 
-mongoose.connect('mongodb://ravagers:6t^2dz3*qrlZ@ds149613.mlab.com:49613/ravagers', function (err, database) {
+mongoose.connect('mongodb://localhost:27017/ravagers', function (err, database) {
   if (err) {
     console.log(err);
   }

@@ -2,7 +2,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema
 
 var ReviewerSchema = new Schema({
-    id: Number,
+    user_id: Number,
 
     username: {
         type: String
@@ -18,3 +18,5 @@ var ReviewerSchema = new Schema({
 
 
 mongoose.model('Reviewer', ReviewerSchema);
+
+module.exports = ReviewerSchema;

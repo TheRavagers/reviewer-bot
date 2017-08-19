@@ -1,7 +1,8 @@
-var Repo = require("mongoose").model("Repo")
+var mongoose = require('mongoose')
+var Repo = mongoose.model('Repo', require('../app/model/repo.model'))
 
 
-export.list = function(req, res) {
+exports.list = function(req, res) {
 	Repo.find(
 	{
 		id: req.id

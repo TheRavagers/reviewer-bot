@@ -4,6 +4,7 @@ import UserStatsService from '../services/userStatsService';
 export default class Index {
 
     pullRequest = (req, res, next) => {
+        console.log('need to change this', req);
         const body = req.body;
         const { action, number, pull_request, repository } = body;
         const { name, owner } = repository;
