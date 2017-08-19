@@ -14,7 +14,7 @@ export default class UserStatsService {
 
                 for (let i = 0; i < length; i++) {
                     const { total, weeks, author } = userStats[i];
-                    const points = total * 2 + Math.abs(weeks[0]['a'] - weeks[0]['d']) / 5;
+                    const points = total * 1.5 + Math.abs(weeks[0]['a'] - weeks[0]['d']) / 4;
                     combinedResults.push({ points, author });
                 }
 
