@@ -5,7 +5,6 @@ import RepoService from '../services/RepoService';
 export default class Index {
 
     pullRequest = (req, res, next) => {
-        console.log('need to change this', req);
         const body = req.body;
 
         const { action, number, pull_request, repository } = body;
@@ -42,6 +41,8 @@ export default class Index {
 
     pullRequestTwo = (req, res, next) => {
         const body = req.body;
+
+        console.log('action', action);
 
         const { action, number, pull_request, repository } = body;
         const { name, owner } = repository;
