@@ -91,8 +91,7 @@ export default class Index {
                                 type: el.author.type,
                                 site_admin: el.author.site_admin
                             }).catch((err) => {
-                                console.log('upsertUserData')
-                                console.log(err);
+                                console.log('upsertUserData', err);
                             });
 
                         repoService.upsertUserStatics(
