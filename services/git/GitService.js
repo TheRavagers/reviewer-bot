@@ -12,12 +12,14 @@ export default class GitApiManager {
         this.token = process.env.TOKEN || urlConfig.security_token;
         this.org = org
     }
+
     getFileContent(fileName) {
         return this.makeHttpCall(fileName)
             .then((response) => {
                 return Promise.resolve(response);
             });
     }
+
     getRepoList(repoName) {
         if (!this.token)
             throw new Error("No token found");
@@ -27,6 +29,7 @@ export default class GitApiManager {
                 return Promise.resolve(response.data);
             });
     }
+
     getRepoInfo(repoName) {
         if (!this.token)
             throw new Error("No token found");
@@ -36,6 +39,7 @@ export default class GitApiManager {
                 return Promise.resolve(response.data);
             });
     }
+
     getContributorsList(repoName) {
         if (!this.token)
             throw new Error("No token found");
@@ -45,6 +49,17 @@ export default class GitApiManager {
                 return Promise.resolve(response.data);
             });
     }
+
+    getContributorsStats(repoName) {
+        if (!this.token)
+            throw new Error("No token found");
+
+        return this.makeHttpCall(this.processURL(urlConfig.contributors_stats_url, { repo: repoName }))
+            .then((response) => {
+                return Promise.resolve(response.data);
+            });
+    }
+
     getCommits(repoName) {
         if (!this.token)
             throw new Error("No token found");
@@ -64,6 +79,7 @@ export default class GitApiManager {
                 return Promise.resolve(response.data);
             });
     }
+
     submitPullRequestReviewers(repo, prnumber, data) {
         if (!this.token)
             throw new Error("No token found");
