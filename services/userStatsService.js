@@ -7,7 +7,6 @@ export default class UserStatsService {
     getCount = (repo) => {
         return new Promise((resolve, reject) => {
             this.gitService.getContributorsStats(repo).then((response) => {
-                console.log(response)
                 const userStats = response;
                 const length = userStats.length;
 

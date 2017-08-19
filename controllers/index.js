@@ -5,11 +5,14 @@ export default class Index {
 
     pullRequest = (req, res, next) => {
         const body = req.body;
+
         const { action, number, pull_request, repository } = body;
         const { name, owner } = repository;
         const userWhoRaisedPR = pull_request.user.login;
 
-        if (['opened', 'closed', 'reopened', 'edited'].indexOf(action) !== -1) {
+        console.log('action', action)
+
+        if (['opened', 'closed', 'reopened', 'edited', 'review_requested'].indexOf(action) !== -1) {
             const gitService = new GitService(owner.login);
             const userStatService = new UserStatsService(gitService);
 
