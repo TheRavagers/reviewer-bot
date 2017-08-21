@@ -106,8 +106,6 @@ export default class Index {
                     })
                 });
 
-
-
             userStatService.getCount(name).then((result) => {
                 const topReviewers = userStatService.getTopReviewers(result);
                 const removePRRaiser = topReviewers.filter((user) => {
