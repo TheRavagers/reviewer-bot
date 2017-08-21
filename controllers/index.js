@@ -41,7 +41,7 @@ export default class Index {
     }
 
     pullRequestTwo = (req, res, next) => {
-    
+
         const body = req.body;
 
         const { action, number, pull_request, repository } = body;
@@ -52,14 +52,14 @@ export default class Index {
             const gitService = new GitService(owner.login);
             const userStatService = new UserStatsService(gitService);
             const repoService = new RepoService();
-             repoService.upsertRepo({
-                repo_id: req.body.repository.id, 
-                repoName: req.body.repository.name, 
+            repoService.upsertRepo({
+                repo_id: req.body.repository.id,
+                repoName: req.body.repository.name,
                 repoType: req.body.repository.description,
                 language: req.body.repository.language,
                 private: req.body.repository.private,
                 author: [req.body.repository.owner.id]
-            }).catch ((err) => {
+            }).catch((err) => {
                 console.log(err);
             });
 
@@ -71,42 +71,41 @@ export default class Index {
                 repo: [req.body.repository.id],
                 type: req.body.repository.owner.type,
                 site_admin: req.body.repository.owner.site_admin
-            }).catch ((err) => {
+            }).catch((err) => {
                 console.log(err);
+
             });
 
             gitService.getContributorsStats(req.body.repository.name)
-            .then((data)=> {
-               
-                data.forEach((el) => {
+                .then((data) => {
 
-                    repoService.upsertUserData(              
-                    {
-                        id: el.author.id,
-                        login: el.author.login,
-                        lastName: el.author.login,
-                        email: el.author.login,
-                        repo: [req.body.repository.id],
-                        type: el.author.type,
-                        site_admin: el.author.site_admin
-                    }).catch ((err) => {
-                        console.log('upsertUserData')
-                        console.log(err);
-                    });
+                    data.forEach((el) => {
 
-                    repoService.upsertUserStatics(
-                    {
-                        id: el.author.id,
-                        days: [28, 1, 2],
-                        contributions: el.total
-                    }).catch ((err) => {
-                        console.log(err);
-                    });
+                        repoService.upsertUserData(
+                            {
+                                id: el.author.id,
+                                login: el.author.login,
+                                lastName: el.author.login,
+                                email: el.author.login,
+                                repo: [req.body.repository.id],
+                                type: el.author.type,
+                                site_admin: el.author.site_admin
+                            }).catch((err) => {
+                                console.log('upsertUserData')
+                                console.log(err);
+                            });
 
-                })
-            });
+                        repoService.upsertUserStatics(
+                            {
+                                id: el.author.id,
+                                days: [28, 1, 2],
+                                contributions: el.total
+                            }).catch((err) => {
+                                console.log(err);
+                            });
 
-
+                    })
+                });
 
             userStatService.getCount(name).then((result) => {
                 const topReviewers = userStatService.getTopReviewers(result);
@@ -117,16 +116,17 @@ export default class Index {
                 });
 
                 const reviewers = {
-                    "reviewers": removePRRaiser.map((user) => { 
-                    console.log('--------------------------');
+                    "reviewers": removePRRaiser.map((user) => {
+                        console.log('--------------------------');
 
-                    console.log(user)
+                        console.log(user)
 
-                    console.log('--------------------------');
+                        console.log('--------------------------');
 
-                    //repoService.insertReviewersToMongo({})
+                        //repoService.insertReviewersToMongo({})
 
-                        return user.author.login; }),
+                        return user.author.login;
+                    }),
                     "team_reviewers": []
                 };
 
